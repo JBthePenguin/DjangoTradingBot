@@ -1,0 +1,7 @@
+env/
+
+django_trading_bot/__pycache__/
+
+visitorapp/__pycache__/
+
+visitorapp/migrations/__pycache__/
