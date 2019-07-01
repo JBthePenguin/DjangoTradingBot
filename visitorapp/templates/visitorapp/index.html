@@ -1,1 +1,39 @@
-Hello world
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="fr">
+        
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Django Trading Bot Website">
+        <meta name="author" content="JBthePenguin">
+        <!-- Favicon -->
+        <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/x-icon" />
+        <!---->
+        <!-- Title -->
+        <title>
+            Django Trading Bot
+        </title>    
+        <!---->
+        <!-- CSS -->
+        <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/custom/styles.css' %}" rel="stylesheet">
+        <!---->
+    </head>
+        
+    <body>
+        <!-- Header -->
+        {% include 'visitorapp/header.html' %}
+        <!---->
+        <!-- Main -->
+        {% include 'visitorapp/main.html' %}
+        <!-- Scripts -->
+        <script src="{% static 'js/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/custom/script.js' %}"></script>
+        <!---->
+    </body>
+
+</html>
