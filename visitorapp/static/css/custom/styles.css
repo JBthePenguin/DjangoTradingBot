@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'roboto';
+    src: url('../../fonts/roboto/roboto-regular-webfont.eot');
+    src: url('../../fonts/roboto/roboto-regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../../fonts/roboto/roboto-regular-webfont.woff2') format('woff2'),
+        url('../../fonts/roboto/roboto-regular-webfont.woff') format('woff'),
+        url('../../fonts/roboto/roboto-regular-webfont.ttf') format('truetype'),
+        url('../../fonts/roboto/roboto-regular-webfont.svg#robotoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'banksia';
+    src: url('../../fonts/banksia/banksia-webfont.eot');
+    src: url('../../fonts/banksia/banksia-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../../fonts/banksia/banksia-webfont.woff2') format('woff2'),
+        url('../../fonts/banksia/banksia-webfont.woff') format('woff'),
+        url('../../fonts/banksia/banksia-webfont.ttf') format('truetype'),
+        url('../../fonts/banksia/banksia-webfont.svg#banksiaregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'clearly';
+    src: url('../../fonts/clearly/printclearly-webfont.eot');
+    src: url('../../fonts/clearly/printclearly-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../../fonts/clearly/printclearly-webfont.woff2') format('woff2'),
+        url('../../fonts/clearly/printclearly-webfont.woff') format('woff'),
+        url('../../fonts/clearly/printclearly-webfont.ttf') format('truetype'),
+        url('../../fonts/clearly/printclearly-webfont.svg#print_clearlyregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+header {
+    font-family: 'roboto', Arial, sans-serif;
+}
+
+main {
+    font-family: 'banksia', Arial, sans-serif;
+    margin-top: 1rem;
+}
+
+main td, #number-trades {
+    font-family: 'clearly', Arial, sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
