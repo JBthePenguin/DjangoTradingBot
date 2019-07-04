@@ -15,8 +15,10 @@ postgres=# \q
 postgres@somewhere:~$ exit
 ```
 ## Clone the application and install the necessary requirements
-Clone the folder, go inside, create a virtual environment for Python with virtualenv (*!!! maybe you have to install [virtualenv](https://virtualenv.pypa.io/en/stable/) !!!*), use it, and install all necessary dependencies ([django](https://www.djangoproject.com/foundation/), [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/stable/), [psycopg2-binary](https://pypi.org/project/psycopg2-binary/)):
+Clone the folder, go inside, create a virtual environment for Python with virtualenv (*!!! maybe you have to install [virtualenv](https://virtualenv.pypa.io/en/stable/) !!!*), use it, and install all necessary dependencies ([django](https://www.djangoproject.com/foundation/), [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/stable/), [psycopg2-binary](https://pypi.org/project/psycopg2-binary/), [python-binance](https://python-binance.readthedocs.io/en/latest/)):
+To install python-binance, you need python3-dev
 ```shell
+$ sudo apt-get install python3-dev
 $ git clone https://github.com/JBthePenguin/DjangoTradingBot.git
 $ cd DjangoTradingBot
 $ virtualenv -p python3 env

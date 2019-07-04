@@ -1,6 +1,7 @@
 {% load static %}
 
 <main class="container">
+    <!-- Bank -->
     <div  class="table-responsive-sm text-center">
         <table class="table table-striped table-bordered table-dark">
             <thead>
@@ -33,9 +34,43 @@
             </tbody>
         </table>
     </div>
+    <!---->
+    <!-- Trades completed -->
     <div class="text-center">
         <span id="number-trades">15</span> Trades completed<br>
         <button id="trades" class="btn btn-danger">View all trades completed</button>
         <div id="all-trades"></div>
     </div>
+    <!---->
+    <!-- Trade in progress -->
+    <div class="table-responsive-sm text-center">
+        <table class="table">
+            <caption>Trade in progress: open the March 3rd 2019 at 22h35 </caption>
+            <thead>
+                <tr>
+                    <th scope="col">Market</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-success">
+                    <td>BNB-BTC</td>
+                    <td>Sell 2 BNB at 0.003215 BTC</td>
+                    <td>Completed</td>
+                </tr>
+                <tr class="bg-success">
+                    <td>BTC-ETH</td>
+                    <td>Buy 0.0263 ETH at 0.000142 BTC</td>
+                    <td>Completed</td>
+                </tr>
+                <tr class="bg-danger">
+                    <td>BNB-ETH</td>
+                    <td>Buy 2.01 BNB at 0.012 ETH</td>
+                    <td>Not completed</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!---->
 </main>
