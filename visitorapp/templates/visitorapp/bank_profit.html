@@ -1,0 +1,59 @@
+{% load static %}
+
+<div  class="table-responsive-sm text-center">
+    <table class="table table-striped table-bordered table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Bank</th>
+                <th scope="col">{{ currencies.0.name }}</th>
+                <th scope="col">{{ currencies.1.name }}</th>
+                <th scope="col">{{ currencies.2.name }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Banks -->
+            <tr>
+                <th scope="row">at the beginning</th>
+                <td>{{ start_bank.amount_currency_one }} {{ currencies.0.symbol }}</td>
+                <td>{{ start_bank.amount_currency_two }} {{ currencies.1.symbol }}</td>
+                <td>{{ start_bank.amount_currency_three }} {{ currencies.2.symbol }}</td>
+            </tr>
+            <tr>
+                <th scope="row">at this time</th>
+                <td>{{ present_bank.amount_currency_one }} {{ currencies.0.symbol }}</td>
+                <td>{{ present_bank.amount_currency_two }} {{ currencies.1.symbol }}</td>
+                <td>{{ present_bank.amount_currency_three }} {{ currencies.2.symbol }}</td>
+            </tr>
+            <!---->
+            <!-- Profit -->
+            <tr>
+                <th scope="row">Profit</th>
+                {% if profits.0.0 == "+" %}
+                    <td class="text-success">
+                {% elif profits.0.0 == "-" %}
+                    <td class="text-danger">
+                {% else %}
+                    <td class="text-warning">
+                {% endif %}
+                    {{ profits.0 }} {{ currencies.0.symbol }}</td>
+                {% if profits.1.0 == "+" %}
+                    <td class="text-success">
+                {% elif profits.1.0 == "-" %}
+                    <td class="text-danger">
+                {% else %}
+                    <td class="text-warning">
+                {% endif %}
+                    {{ profits.1 }} {{ currencies.1.symbol }}</td>
+                {% if profits.2.0 == "+" %}
+                    <td class="text-success">
+                {% elif profits.2.0 == "-" %}
+                    <td class="text-danger">
+                {% else %}
+                    <td class="text-warning">
+                {% endif %}
+                    {{ profits.2 }} {{ currencies.2.symbol }}</td>
+            </tr>
+            <!---->
+        </tbody>
+    </table>
+</div>

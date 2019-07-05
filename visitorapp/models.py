@@ -11,6 +11,7 @@ class Currency(models.Model):
     """ Model for crypto currency with name and symbol """
     name = models.CharField(max_length=20)
     symbol = models.CharField(max_length=3)
+    position = models.IntegerField(db_index=True, default=0)
 
 
 class Bank(models.Model):
@@ -18,3 +19,7 @@ class Bank(models.Model):
     amount_currency_one = models.FloatField()
     amount_currency_two = models.FloatField()
     amount_currency_three = models.FloatField()
+
+
+class Bot(models.Model):
+    is_working = models.BooleanField(default=False)

@@ -15,8 +15,12 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <img src="{% static 'img/logo.png' %}" class="img-fluid">
-            <br><strong>Status:</strong><span class="text-success">ON</span>
+            <img src="{% static 'img/logo.png' %}" class="img-fluid"><br>
+            {% if bot_is_working %}
+                <strong class="text-success">ON</strong>
+            {% else %}
+                <strong class="text-danger">OFF</strong>
+            {% endif %}
         </div>
     </div>
     <div class="row">

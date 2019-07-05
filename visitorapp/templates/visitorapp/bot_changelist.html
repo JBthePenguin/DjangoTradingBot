@@ -1,0 +1,12 @@
+{% extends 'admin/change_list.html' %}
+
+{% block object-tools %}
+    <div>
+        <form action="start_bot/" method="POST">
+            {% csrf_token %}
+                <button type="submit">Démarrer/Arrêter le robot trader</button>
+        </form>
+    </div>
+    <br />
+    {{ block.super }}
+{% endblock %}

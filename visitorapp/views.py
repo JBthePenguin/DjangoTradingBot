@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from visitorapp.models import Currency, Bank
+from visitorapp.models import Currency, Bank, Bot
 
 
 def index(request):
@@ -9,7 +9,7 @@ def index(request):
         all_trades = "first trade...."
         return HttpResponse(all_trades)
     # currencies
-    currencies = Currency.objects.all()
+    currencies = Currency.objects.all().order_by("position")
     # banks
     start_bank = Bank.objects.get(name="start")
     present_bank = Bank.objects.get(name="now")
@@ -29,10 +29,12 @@ def index(request):
         else:
             profit = "0"
         profits[i] = profit
-    print(profits)
+    # bot
+    bot_is_working = Bot.objects.all().first().is_working
     context = {
         "currencies": currencies,
         "start_bank": start_bank,
         "present_bank": present_bank,
-        "profits": profits}
+        "profits": profits,
+        "bot_is_working": bot_is_working}
     return render(request, 'visitorapp/index.html', context)
