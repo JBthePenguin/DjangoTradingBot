@@ -1,15 +1,17 @@
-from visitorapp.models import Binance
+from visitorapp.models import BinanceKey, Currency
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
 from requests.exceptions import ReadTimeout
 
-BINANCE = Binance.objects.all().first()
-API_KEY = BINANCE.api_key
-SECRET_KEY = BINANCE.secret_key
-CURRENCY_ONE = BINANCE.currency_one
-CURRENCY_TWO = BINANCE.currency_two
-CURRENCY_THREE = BINANCE.currency_three
+BINANCE_KEYS = BinanceKey.objects.all().first()
+API_KEY = BINANCE_KEYS.api
+SECRET_KEY = BINANCE_KEYS.secret
 TRADER = Client(API_KEY, SECRET_KEY)
+
+CURRENCIES = Currency.objects.all()
+CURRENCY_ONE = CURRENCIES[0].symbol
+CURRENCY_TWO = CURRENCIES[1].symbol
+CURRENCY_THREE = CURRENCIES[2].symbol
 
 
 def check_bank():
@@ -17,10 +19,15 @@ def check_bank():
     while True:
         try:
             balances = TRADER.get_account()['balances']
+            bank = {}
+            for currency in balances:
+                if currency["asset"] in [
+                        CURRENCY_ONE, CURRENCY_TWO, CURRENCY_THREE]:
+                    bank[currency["asset"]] = float(currency["free"])
         except ReadTimeout:
-            print("Error Connect for checking bank")
+            pass
         except BinanceAPIException:
-            print("Error Binance API for bank")
+            pass
         else:
             break
-    return balances
+    return bank

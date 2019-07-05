@@ -1,13 +1,20 @@
 from django.db import models
 
 
-class Binance(models.Model):
+class BinanceKey(models.Model):
     """Model with api's keys, cryptocurrencies and markets"""
-    api_key = models.CharField(max_length=65)
-    secret_key = models.CharField(max_length=65)
-    currency_one = models.CharField(max_length=3)
-    currency_two = models.CharField(max_length=3)
-    currency_three = models.CharField(max_length=3)
-    market_one = models.CharField(max_length=6)
-    market_two = models.CharField(max_length=6)
-    market_three = models.CharField(max_length=6)
+    api = models.CharField(max_length=65)
+    secret = models.CharField(max_length=65)
+
+
+class Currency(models.Model):
+    """ Model for crypto currency with name and symbol """
+    name = models.CharField(max_length=20)
+    symbol = models.CharField(max_length=3)
+
+
+class Bank(models.Model):
+    name = models.CharField(db_index=True, max_length=5)
+    amount_currency_one = models.FloatField()
+    amount_currency_two = models.FloatField()
+    amount_currency_three = models.FloatField()
