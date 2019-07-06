@@ -1,21 +1,10 @@
 from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponseRedirect
+from django import db
 from visitorapp.models import BinanceKey, Currency, Bank, Bot
+from visitorapp.trader_bot import trading
 from multiprocessing import Process
-from time import sleep
-
-
-def stop_trading(arg=False):
-    return arg
-
-
-def start_trading():
-    while True:
-        print("bot is running")
-        sleep(1)
-        if stop_trading():
-            break
 
 
 @admin.register(BinanceKey)
@@ -42,7 +31,7 @@ class BotAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         urls = super().get_urls()
-        my_urls = [path('start_bot/', self.start_stop_bot), ]
+        my_urls = [path('start_stop_bot/', self.start_stop_bot), ]
         return my_urls + urls
 
     def start_stop_bot(self, request):
@@ -52,10 +41,11 @@ class BotAdmin(admin.ModelAdmin):
         else:
             bot.is_working = True
         bot.save()
+        db.connections.close_all()
         if bot.is_working:
-            bot_trader = Process(target=start_trading)
+            bot_trader = Process(target=trading)
             bot_trader.start()
+            self.message_user(request, "Le bot a démarré")
         else:
-            stop_trader = Process(target=stop_trading(True))
-            stop_trader.start()
+            self.message_user(request, "Le Bot est arrêté")
         return HttpResponseRedirect("../")
