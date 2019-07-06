@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponseRedirect
 from django import db
-from visitorapp.models import BinanceKey, Currency, Bank, Bot
+from visitorapp.models import (
+    BinanceKey, Currency, Bank, Bot, Market, Order, Trade)
 from visitorapp.trader_bot import trading
 from multiprocessing import Process
 
@@ -49,3 +50,20 @@ class BotAdmin(admin.ModelAdmin):
         else:
             self.message_user(request, "Le Bot est arrêté")
         return HttpResponseRedirect("../")
+
+
+@admin.register(Market)
+class MarketAdmin(admin.ModelAdmin):
+    list_display = ("symbol", "position")
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ("market", "side", "quantity", "price", "is_completed")
+
+
+@admin.register(Trade)
+class TradeAdmin(admin.ModelAdmin):
+    list_display = (
+        "open_date", "closed_date", "order_one", "order_two",
+        "order_three", "is_completed")

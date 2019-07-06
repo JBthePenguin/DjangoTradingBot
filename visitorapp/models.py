@@ -23,3 +23,28 @@ class Bank(models.Model):
 
 class Bot(models.Model):
     is_working = models.BooleanField(default=False)
+
+
+class Market(models.Model):
+    symbol = models.CharField(max_length=6)
+    position = models.IntegerField(db_index=True, default=0)
+
+
+class Order(models.Model):
+    market = models.ForeignKey(Market, on_delete=models.CASCADE)
+    side = models.CharField(max_length=4)
+    quantity = models.CharField(max_length=20)
+    price = models.CharField(max_length=20)
+    is_completed = models.BooleanField(default=False)
+
+
+class Trade(models.Model):
+    open_date = models.DateTimeField(db_index=True, auto_now_add=True)
+    closed_date = models.DateTimeField(default="")
+    order_one = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name="trade_order_one")
+    order_two = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name="trade_order_two")
+    order_three = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name="trade_order_three")
+    is_completed = models.BooleanField(db_index=True, default=False)
