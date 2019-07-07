@@ -3,7 +3,7 @@ from django.urls import path
 from django.http import HttpResponseRedirect
 from django import db
 from visitorapp.models import (
-    BinanceKey, Currency, Bank, Bot, Market, Order, Trade)
+    BinanceKey, Currency, Bank, Bot, Market, Order, Trade, Error)
 from visitorapp.trader_bot import trading
 from multiprocessing import Process
 
@@ -67,3 +67,8 @@ class TradeAdmin(admin.ModelAdmin):
     list_display = (
         "open_date", "closed_date", "order_one", "order_two",
         "order_three", "is_completed")
+
+
+@admin.register(Error)
+class ErrorAdmin(admin.ModelAdmin):
+    list_display = ("date", "type_error")

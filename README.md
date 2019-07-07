@@ -16,7 +16,7 @@ postgres@somewhere:~$ exit
 ```
 ## Clone the application and install the necessary requirements
 Clone the folder, go inside, create a virtual environment for Python with virtualenv (*!!! maybe you have to install [virtualenv](https://virtualenv.pypa.io/en/stable/) !!!*), use it, and install all necessary dependencies ([django](https://www.djangoproject.com/foundation/), [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/stable/), [psycopg2-binary](https://pypi.org/project/psycopg2-binary/), [python-binance](https://python-binance.readthedocs.io/en/latest/)):
-To install python-binance, you need python3-dev
+For python-binance, you need to install python3-dev.
 ```shell
 $ sudo apt-get install python3-dev
 $ git clone https://github.com/JBthePenguin/DjangoTradingBot.git
@@ -35,9 +35,11 @@ Make the migrations:
 Create a "superuser" account:
 ```shell
 (env)$ python manage.py createsuperuser
-```
-## Start and use the Application**
+``` 
+## Start and use the Application
 ```shell
 (env)$ python manage.py runserver
 ```
-**NOW, with your favorite browser, go to this url [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to use the application and [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin) for the admin site.**
+Before using the application, you have to connect to the admin site and create one bot and before start it, create binance keys (your API and Secret keys), three currencies ('BTC' -> 1, ETH -> 2, BNB -> 3), three markets ('BNBBTC' -> 1, 'ETHBTC' -> 2, 'BNBETH' -> 3), two banks (one with name 'now' and the other 'present') with the same amounts (your start bank) and one error (type -> 'error').
+
+**NOW, with your favorite browser, go to this url [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see the visitor interface and [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin) for the admin site where you can start and stop the bot.**

@@ -48,3 +48,8 @@ class Trade(models.Model):
     order_three = models.ForeignKey(
         Order, on_delete=models.CASCADE, related_name="trade_order_three")
     is_completed = models.BooleanField(db_index=True, default=False)
+
+
+class Error(models.Model):
+    date = models.DateTimeField(db_index=True, auto_now_add=True)
+    type_error = models.CharField(max_length=60)
