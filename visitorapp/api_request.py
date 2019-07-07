@@ -36,6 +36,14 @@ def check_rentability(market_one, market_two, market_three):
     return prices, rentability
 
 
+def open_trade_one():
+    print("open trade one")
+
+
+def open_trade_two():
+    print("open trade two")
+
+
 def check_bank():
     """ found balances available for the client """
     while True:
