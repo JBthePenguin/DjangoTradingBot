@@ -65,7 +65,7 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(Trade)
 class TradeAdmin(admin.ModelAdmin):
     list_display = (
-        "open_date", "closed_date", "order_one", "order_two",
+        "open_date", "order_one", "order_two",
         "order_three", "is_completed")
 
 
