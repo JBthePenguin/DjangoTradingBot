@@ -121,6 +121,18 @@ def open_trade_two(
     #     price=str(prices[market_two] - 0.000002)[:8])
 
 
+def check_order(market):
+    try:
+        order = TRADER.get_open_orders(symbol=market)
+    except ReadTimeout:
+        order = "ReadTimeout during check order"
+    except ConnectionError:
+        order = "ConnectionError during check order"
+    except BinanceAPIException:
+        order = "BinanceAPIException during check order"
+    return order
+
+
 def check_bank():
     """ found balances available for the client """
     while True:

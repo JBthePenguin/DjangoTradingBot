@@ -39,7 +39,7 @@ class Order(models.Model):
 
 
 class Trade(models.Model):
-    open_date = models.DateTimeField(db_index=True, auto_now_add=True)    
+    open_date = models.DateTimeField(db_index=True, auto_now_add=True)
     closed_date = models.DateTimeField(null=True, default=None)
     order_one = models.ForeignKey(
         Order, on_delete=models.CASCADE, related_name="trade_order_one")

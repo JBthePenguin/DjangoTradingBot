@@ -59,14 +59,37 @@ class MarketAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ("market", "side", "quantity", "price", "is_completed")
+    list_display = (
+        "id", "get_market", "side", "quantity", "price", "is_completed")
+
+    def get_market(self, obj):
+        return "%s" % (obj.market.symbol)
+
+    get_market.admin_order_field = 'market'
+    get_market.short_description = 'Market'
 
 
 @admin.register(Trade)
 class TradeAdmin(admin.ModelAdmin):
     list_display = (
-        "open_date", "order_one", "order_two",
-        "order_three", "is_completed")
+        "open_date", "closed_date", "get_order_one", "get_order_two",
+        "get_order_three", "is_completed")
+
+    def get_order_one(self, obj):
+        return "%s" % (obj.order_one.id)
+
+    def get_order_two(self, obj):
+        return "%s" % (obj.order_two.id)
+
+    def get_order_three(self, obj):
+        return "%s" % (obj.order_three.id)
+
+    get_order_one.admin_order_field = "order_one"
+    get_order_one.short_description = "Order one id"
+    get_order_two.admin_order_field = "order_two"
+    get_order_two.short_description = "Order two id"
+    get_order_three.admin_order_field = "order_three"
+    get_order_three.short_description = "Order three id"
 
 
 @admin.register(Error)
