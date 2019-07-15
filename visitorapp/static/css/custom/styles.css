@@ -48,3 +48,12 @@ main td, #number-trades {
     font-size: 1.1rem;
     font-weight: bold;
 }
+
+main #completed-trades {
+    margin-bottom: 2rem;
+}
+
+main #completed-trades .card {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}

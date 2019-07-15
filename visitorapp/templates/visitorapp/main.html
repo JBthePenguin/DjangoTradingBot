@@ -6,16 +6,65 @@
     <!---->
     <!-- Trades completed -->
     <div class="text-center">
-        <span id="number-trades">15</span> Trades completed<br>
-        <button id="trades" class="btn btn-danger">View all trades completed</button>
-        <div id="all-trades"></div>
+        <span id="number-trades">{{ completed_trades }}</span> Trades completed<br>
+    </div>
+    <div id="completed-trades" class="row text-center">
+        {% for trade in trades %}
+            <div class="col-md-6">
+                <div class="card border-secondary">
+                    <div class="card-header bg-secondary">
+                        Open: {{ trade.open_date }} - Close: {{ trade.closed_date }}
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive-sm text-center">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Market</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ trade.order_one.market.symbol }}</td>
+                                        <td>{{ trade.order_one.side }} {{ trade.order_one.quantity }} at {{ trade.order_one.price }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ trade.order_two.market.symbol }}</td>
+                                        <td>{{ trade.order_two.side }} {{ trade.order_two.quantity }} at {{ trade.order_two.price }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{ trade.order_three.market.symbol }}</td>
+                                        <td>{{ trade.order_three.side }} {{ trade.order_three.quantity }} at {{ trade.order_three.price }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% if paginate %}
+            <nav class="col-md-10 mx-auto" aria-label="...">
+                <div class="row">
+                    {% if trades.has_previous %}
+                        <a class="pag_link btn-dark col-md-3 mx-auto my-auto text-center" href="?page={{ trades.previous_page_number }}" style="color: white">&larr; Précédent</a>
+                    {% endif %}
+                    {% if trades.has_next %}
+                        <a class="pag_link btn-dark col-md-3 mx-auto my-auto text-center" href="?page={{ trades.next_page_number }}" style="color: white">Suivant &rarr;</a>
+                    {% endif %}
+                </div>
+            </nav>
+        {% endif %}
     </div>
     <!---->
     <!-- Trade in progress -->
-    <div class="table-responsive-sm text-center">
-        <table class="table">
-            <caption>Trade in progress: open the March 3rd 2019 at 22h35 </caption>
+    {% if open_trade.count != 0 %}
+        <div class="table-responsive-sm text-center">
+            <table class="table">
+                <caption>Trade in progress: open {{ open_trade.0.open_date }}</caption>
             <thead>
+            <!-- HEEEEEREEEEEE -->
                 <tr>
                     <th scope="col">Market</th>
                     <th scope="col">Amount</th>
@@ -41,5 +90,6 @@
             </tbody>
         </table>
     </div>
+    {% endif %}
     <!---->
 </main>
