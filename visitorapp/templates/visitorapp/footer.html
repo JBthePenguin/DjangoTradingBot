@@ -1,16 +1,15 @@
 {% load static %}
-
-<footer class="container">
+<!-- Footer -->
+<footer class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <img id="jb_the_penguin" class="float-left" src="{% static 'img/jbthepenguin.png' %}">
-            © Copyright 2019 JBthePenguin - No right reserved
-            <a href="https://github.com/JBthePenguin" role="button" onclick="window.open(this.href); return false;">
-                <i class="fa fa-github fa-2x text-dark"></i>
-            </a>
-            <a href="https://twitter.com/JBthePenguin" role="button" onclick="window.open(this.href); return false;">
-                <i class="fa fa-twitter-square fa-2x"></i>
-            </a>
+            <img id="jb_the_penguin" class="float-left" src="{% static 'img/jbthepenguin.png' %}"><small>© Copyright 2019 JBthePenguin - No right reserved</small>
+            <span class="float-right">
+                <a href="https://jbthepenguin.github.io/" role="button" onclick="window.open(this.href); return false;"><img src="{% static 'img/github.png' %}"></a>
+                <a href="https://twitter.com/JBthePenguin" role="button" onclick="window.open(this.href); return false;"><img src="{% static 'img/twitter.png' %}"></a>
+                <a href="https://www.linkedin.com/in/jean-baptiste-labaty-a5b084155/" role="button" onclick="window.open(this.href); return false;"><img src="{% static 'img/linkedin.png' %}"></a>
+                <a href="mailto:jbthepenguin@netcourrier.com"><img src="{% static 'img/mailto.png' %}"></a>
+            </span>
         </div>
     </div>
 </footer>
