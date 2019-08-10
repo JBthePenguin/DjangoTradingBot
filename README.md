@@ -8,7 +8,7 @@ Connect to PostgreSQL client, create database and new user with privileges:
 $ sudo su - postgres
 postgres@somewhere:~$ psql
 postgres=# CREATE USER "django_trading_bot";
-postgres=# ALTER USER projet WITH PASSWORD 'cool';
+postgres=# ALTER USER django_trading_bot WITH PASSWORD 'cool';
 postgres=# CREATE DATABASE "db_django_trading_bot";
 postgres=# GRANT ALL PRIVILEGES ON DATABASE db_django_trading_bot TO django_trading_bot;
 postgres=# \q
@@ -40,6 +40,8 @@ Create a "superuser" account:
 ```shell
 (env)$ python manage.py runserver
 ```
-Before using the application, you have to connect to the admin site and create one bot and before start it, create binance keys (your API and Secret keys), three currencies ('BTC' -> 1, ETH -> 2, BNB -> 3), three markets ('BNBBTC' -> 1, 'ETHBTC' -> 2, 'BNBETH' -> 3), two banks (one with name 'now' and the other 'present') with the same amounts (your start bank) and one error (type -> 'error').
+Before using the application, you have to connect to the admin site:
+[http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin)
+...and create one bot and before start it, create one bot (don't check is_working), binance keys (your API and Secret keys), three currencies ('BTC' -> 1, ETH -> 2, BNB -> 3), three markets ('BNBBTC' -> 1, 'ETHBTC' -> 2, 'BNBETH' -> 3), two banks (one with name 'now' and the other 'start') with the same amounts (your start bank) and one error (type -> 'error').
 
-**NOW, with your favorite browser, go to this url [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see the visitor interface and [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin) for the admin site where you can start and stop the bot.**
+**NOW, with your favorite browser, go to this url [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see the visitor interface and [http://127.0.0.1:8000/admin/visitorapp/bot/](http://127.0.0.1:8000/admin/visitorapp/bot/) to start and stop the bot from the admin site**

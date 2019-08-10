@@ -83,7 +83,7 @@ DATABASES = {
         'USER': 'django_trading_bot',
         'PASSWORD': 'cool',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 

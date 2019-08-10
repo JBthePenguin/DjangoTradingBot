@@ -5,12 +5,15 @@
     {% include 'visitorapp/bank_profit.html' %}
     <!---->
     <!-- Trades completed -->
+    {% if not trades %}
+            <p class="text-center">No trade completed</p>
+    {% else %}
     <div class="text-center">
         <span id="number-trades">{{ completed_trades }}</span> Trades completed<br>
     </div>
     <div id="completed-trades" class="row text-center">
         {% for trade in trades %}
-            <div class="col-md-6">
+            <div class="col-md-6 mx-auto">
                 <div class="card border-secondary">
                     <div class="card-header bg-secondary">
                         Open: {{ trade.open_date }} - Close: {{ trade.closed_date }}
@@ -56,40 +59,64 @@
                 </div>
             </nav>
         {% endif %}
+        {% endif %}
     </div>
     <!---->
     <!-- Trade in progress -->
     {% if open_trade.count != 0 %}
+        Trade in progress: open {{ open_trade.0.open_date }}
         <div class="table-responsive-sm text-center">
             <table class="table">
-                <caption>Trade in progress: open {{ open_trade.0.open_date }}</caption>
-            <thead>
-            <!-- HEEEEEREEEEEE -->
-                <tr>
-                    <th scope="col">Market</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="bg-success">
-                    <td>BNB-BTC</td>
-                    <td>Sell 2 BNB at 0.003215 BTC</td>
-                    <td>Completed</td>
-                </tr>
-                <tr class="bg-success">
-                    <td>BTC-ETH</td>
-                    <td>Buy 0.0263 ETH at 0.000142 BTC</td>
-                    <td>Completed</td>
-                </tr>
-                <tr class="bg-danger">
-                    <td>BNB-ETH</td>
-                    <td>Buy 2.01 BNB at 0.012 ETH</td>
-                    <td>Not completed</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                <thead>
+                    <tr>
+                        <th scope="col">Market</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if open_trade.0.order_one.is_completed %}
+                        <tr class="bg-success">
+                    {% else %}
+                        <tr class="bg-danger">
+                    {% endif %}
+                        <td>{{ open_trade.0.order_one.market.symbol }}</td>
+                        <td>{{ open_trade.0.order_one.side }} {{ open_trade.0.order_one.quantity }} at {{ open_trade.0.order_one.price }}</td>
+                        {% if open_trade.0.order_one.is_completed %}
+                            <td>Completed</td>
+                        {% else %}
+                            <td>Not completed</td>
+                        {% endif %}
+                    </tr>
+                    {% if open_trade.0.order_two.is_completed %}
+                        <tr class="bg-success">
+                    {% else %}
+                        <tr class="bg-danger">
+                    {% endif %}
+                        <td>{{ open_trade.0.order_two.market.symbol }}</td>
+                        <td>{{ open_trade.0.order_two.side }} {{ open_trade.0.order_two.quantity }} at {{ open_trade.0.order_two.price }}</td>
+                        {% if open_trade.0.order_two.is_completed %}
+                            <td>Completed</td>
+                        {% else %}
+                            <td>Not completed</td>
+                        {% endif %}
+                    </tr>
+                    {% if open_trade.0.order_three.is_completed %}
+                        <tr class="bg-success">
+                    {% else %}
+                        <tr class="bg-danger">
+                    {% endif %}
+                        <td>{{ open_trade.0.order_three.market.symbol }}</td>
+                        <td>{{ open_trade.0.order_three.side }} {{ open_trade.0.order_three.quantity }} at {{ open_trade.0.order_three.price }}</td>
+                        {% if open_trade.0.order_three.is_completed %}
+                            <td>Completed</td>
+                        {% else %}
+                            <td>Not completed</td>
+                        {% endif %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     {% endif %}
     <!---->
 </main>

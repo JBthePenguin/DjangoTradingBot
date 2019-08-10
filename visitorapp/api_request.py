@@ -6,6 +6,7 @@ from visitorapp.db_request import get_keys
 
 
 def create_trader():
+    """ create trader with keys and return it """
     api_key, secret_key = get_keys()
     return Client(api_key, secret_key)
 
@@ -27,6 +28,7 @@ def get_prices(trader, markets):
 
 
 def open_sell_order(trader, market, quantity, price):
+    """ open a sell order """
     trader.create_test_order(
         symbol=market,
         side=SIDE_SELL,
@@ -41,6 +43,7 @@ def open_sell_order(trader, market, quantity, price):
 
 
 def open_buy_order(trader, market, quantity, price):
+    """ open a buy order """
     trader.create_test_order(
         symbol=market,
         side=SIDE_BUY,
@@ -56,6 +59,8 @@ def open_buy_order(trader, market, quantity, price):
 
 
 def check_order(trader, market):
+    """ check if there is open order on a specific market and
+    return it or [] if not """
     try:
         order = trader.get_open_orders(symbol=market)
     except ReadTimeout:
