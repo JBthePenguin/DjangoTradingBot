@@ -1,6 +1,6 @@
 from django.utils import timezone
 from visitorapp.models import (
-    Market, Bot, BinanceKey, Order, Trade, Bank, Currency, Error)
+    Market, Bot, BinanceKey, Order, Trade, Bank, Currency, Error, Offset)
 
 
 def get_keys():
@@ -22,6 +22,8 @@ def check_bot():
 
 def save_order(market, side, quantity, price):
     """ return the order after save it in db """
+    if quantity == "2.0":
+        quantity = "2"
     return Order.objects.create(
         market=Market.objects.get(symbol=market),
         side=side,
@@ -81,3 +83,39 @@ def save_error(type_error):
     error.date = timezone.now()
     error.type_error = type_error
     error.save()
+
+
+def get_offset():
+    """ return offset """
+    return Offset.objects.all().first()
+
+
+def update_offset(offset):
+    """ update the offset to change the currency that loose
+    at each trade placed and return it"""
+    trade_number = offset.trade_number
+    trade_number += 1
+    if trade_number == 5:
+        trade_number = 1
+    if trade_number == 1:
+        offset_bnb = 0
+        offset_btc = 0
+        offset_eth = 0.001
+    elif trade_number == 2:
+        offset_bnb = 0.01
+        offset_btc = 0
+        offset_eth = 0.001
+    elif trade_number == 3:
+        offset_bnb = 0
+        offset_btc = 0.001
+        offset_eth = 0
+    elif trade_number == 4:
+        offset_bnb = 0.01
+        offset_btc = 0.001
+        offset_eth = 0
+    offset.trade_number = trade_number
+    offset.bnb = offset_bnb
+    offset.btc = offset_btc
+    offset.eth = offset_eth
+    offset.save()
+    return offset

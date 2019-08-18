@@ -1,5 +1,4 @@
 from binance.client import Client
-from binance.enums import *
 from binance.exceptions import BinanceAPIException
 from requests.exceptions import ReadTimeout, ConnectionError
 from visitorapp.db_request import get_keys
@@ -29,33 +28,18 @@ def get_prices(trader, markets):
 
 def open_sell_order(trader, market, quantity, price):
     """ open a sell order """
-    trader.create_test_order(
+    trader.order_limit_sell(
         symbol=market,
-        side=SIDE_SELL,
-        type=ORDER_TYPE_LIMIT,
-        timeInForce=TIME_IN_FORCE_GTC,
         quantity=quantity,
         price=price)
-    # TRADER.order_limit_sell(
-    #     symbol=market_one,
-    #     quantity=2,
-    #     price=str(prices[market_one] - 0.0000001)[:9])
 
 
 def open_buy_order(trader, market, quantity, price):
     """ open a buy order """
-    trader.create_test_order(
+    trader.order_limit_buy(
         symbol=market,
-        side=SIDE_BUY,
-        type=ORDER_TYPE_LIMIT,
-        timeInForce=TIME_IN_FORCE_GTC,
         quantity=quantity,
         price=price)
-    # TRADER.order_limit_buy(
-    #     symbol=market_two,
-    #     quantity=str(((2 * (prices[market_one] - 0.0000001)) / (
-    #         prices[market_two] + 0.000001)) + offset_btc_eth[0])[:5],
-    #     price=str(prices[market_two] + 0.000001)[:8])
 
 
 def check_order(trader, market):

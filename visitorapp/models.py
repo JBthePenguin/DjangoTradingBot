@@ -53,3 +53,10 @@ class Trade(models.Model):
 class Error(models.Model):
     date = models.DateTimeField(db_index=True, auto_now_add=True)
     type_error = models.CharField(max_length=60)
+
+
+class Offset(models.Model):
+    trade_number = models.IntegerField()
+    bnb = models.FloatField()
+    btc = models.FloatField()
+    eth = models.FloatField()

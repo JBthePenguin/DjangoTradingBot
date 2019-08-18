@@ -3,7 +3,7 @@ from django.urls import path
 from django.http import HttpResponseRedirect
 from django import db
 from visitorapp.models import (
-    BinanceKey, Currency, Bank, Bot, Market, Order, Trade, Error)
+    BinanceKey, Currency, Bank, Bot, Market, Order, Trade, Error, Offset)
 from visitorapp.trader_bot import trading
 from multiprocessing import Process
 
@@ -95,3 +95,8 @@ class TradeAdmin(admin.ModelAdmin):
 @admin.register(Error)
 class ErrorAdmin(admin.ModelAdmin):
     list_display = ("date", "type_error")
+
+
+@admin.register(Offset)
+class OffsetAdmin(admin.ModelAdmin):
+    list_display = ("trade_number", "bnb", "btc", "eth")
