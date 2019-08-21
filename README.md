@@ -42,6 +42,6 @@ Create a "superuser" account:
 ```
 Before using the application, you have to connect to the admin site:
 [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin)
-...and create one bot (don't check is_working) and before start it, create binance keys (your API and Secret keys), three currencies ('BTC' -> 1, ETH -> 2, BNB -> 3), three markets ('BNBBTC' -> 1, 'ETHBTC' -> 2, 'BNBETH' -> 3), two banks (one with name 'now' and the other 'start') with the same amounts (your start bank), one offset (trade_number -> 1, bnb -> 0, btc -> 0, eth -> 0.001) and one error (type -> 'error').
+...and create one bot (don't check is_working and set the quantity of BNB to trade) and before start it, create binance keys (your API and Secret keys), three currencies ('BTC' -> 1, ETH -> 2, BNB -> 3), three markets ('BNBBTC' -> 1, 'ETHBTC' -> 2, 'BNBETH' -> 3), two banks (one with name 'now' and the other 'start') with the same amounts (your start bank), one offset (trade_number -> 1, bnb -> 0, btc -> 0, eth -> 0.001) and one error (type -> 'error').
 
 **NOW, with your favorite browser, go to this url [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see the visitor interface and [http://127.0.0.1:8000/admin/visitorapp/bot/](http://127.0.0.1:8000/admin/visitorapp/bot/) to start and stop the bot from the admin site**

@@ -15,6 +15,11 @@ def get_markets():
     return markets[0].symbol, markets[1].symbol, markets[2].symbol
 
 
+def get_quantity_bnb():
+    """ return the quantity of bnb to trade """
+    return Bot.objects.all().first().quantity_bnb
+
+
 def check_bot():
     """ return true/false if bot is working """
     return Bot.objects.all().first().is_working
@@ -22,8 +27,8 @@ def check_bot():
 
 def save_order(market, side, quantity, price):
     """ return the order after save it in db """
-    if quantity == "2.0":
-        quantity = "2"
+    if quantity[-2:] == ".0":
+        quantity = quantity[:-2]
     return Order.objects.create(
         market=Market.objects.get(symbol=market),
         side=side,

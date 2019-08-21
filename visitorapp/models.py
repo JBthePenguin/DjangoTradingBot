@@ -23,6 +23,7 @@ class Bank(models.Model):
 
 class Bot(models.Model):
     is_working = models.BooleanField(default=False)
+    quantity_bnb = models.FloatField(default=1)
 
 
 class Market(models.Model):

@@ -27,7 +27,7 @@ class BankAdmin(admin.ModelAdmin):
 
 @admin.register(Bot)
 class BotAdmin(admin.ModelAdmin):
-    list_display = ('is_working',)
+    list_display = ('is_working', "quantity_bnb")
     change_list_template = "visitorapp/bot_changelist.html"
 
     def get_urls(self):
@@ -46,9 +46,9 @@ class BotAdmin(admin.ModelAdmin):
         if bot.is_working:
             bot_trader = Process(target=trading)
             bot_trader.start()
-            self.message_user(request, "Le bot a démarré")
+            self.message_user(request, "Bot is started")
         else:
-            self.message_user(request, "Le Bot est arrêté")
+            self.message_user(request, "Bot is stopped")
         return HttpResponseRedirect("../")
 
 
