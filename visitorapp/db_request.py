@@ -124,3 +124,17 @@ def update_offset(offset):
     offset.eth = offset_eth
     offset.save()
     return offset
+
+
+def new_update_offset(offset):
+    trade_number = offset.trade_number
+    trade_number += 1
+    offset_bnb = 0
+    if trade_number == 5:
+        trade_number = 1
+    elif trade_number == 4:
+        offset_bnb = 0.01
+    offset.trade_number = trade_number
+    offset.bnb = offset_bnb
+    offset.save()
+    return offset
