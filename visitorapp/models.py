@@ -49,6 +49,7 @@ class Trade(models.Model):
     order_three = models.ForeignKey(
         Order, on_delete=models.CASCADE, related_name="trade_order_three")
     is_completed = models.BooleanField(db_index=True, default=False)
+    fee = models.FloatField(default=0)
 
 
 class Error(models.Model):

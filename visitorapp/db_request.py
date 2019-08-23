@@ -56,9 +56,10 @@ def get_last_trade():
     return Trade.objects.all().last()
 
 
-def update_trade(trade):
+def update_trade(trade, fee):
     # update trade as completed
     trade.is_completed = True
+    trade.fee = fee
     trade.closed_date = timezone.now()
     trade.save()
 
@@ -72,14 +73,19 @@ def get_currencies():
     return [currency_one, currency_two, currency_three]
 
 
-def save_bank(new_bank):
-    """ save bank in db """
+def save_bank(new_bank, offset):
+    """ save bank in db and return fee"""
     currencies = get_currencies()
     bank = Bank.objects.get(name="now")
+    # calculations of fee
+    old_bnb_balance = bank.amount_currency_three
+    fee = old_bnb_balance - new_bank[currencies[2]] + offset
+    # save bank and return fee
     bank.amount_currency_one = new_bank[currencies[0]]
     bank.amount_currency_two = new_bank[currencies[1]]
     bank.amount_currency_three = new_bank[currencies[2]]
     bank.save()
+    return fee
 
 
 def save_error(type_error):

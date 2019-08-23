@@ -73,7 +73,7 @@ class OrderAdmin(admin.ModelAdmin):
 class TradeAdmin(admin.ModelAdmin):
     list_display = (
         "open_date", "closed_date", "get_order_one", "get_order_two",
-        "get_order_three", "is_completed")
+        "get_order_three", "is_completed", "fee")
 
     def get_order_one(self, obj):
         return "%s" % (obj.order_one.id)

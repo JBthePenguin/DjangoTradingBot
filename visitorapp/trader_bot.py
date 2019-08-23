@@ -8,7 +8,7 @@ from visitorapp.db_request import (
 from math import floor, ceil
 
 
-def check_trade_completed(trader, trade, wait_trade_completed):
+def check_trade_completed(trader, trade, wait_trade_completed, offset):
     # update trade if all orders are completed
     if (trade.order_one.is_completed) and (
         trade.order_two.is_completed) and (
@@ -19,9 +19,10 @@ def check_trade_completed(trader, trade, wait_trade_completed):
         if isinstance(new_bank, str):
             save_error(new_bank)
         else:
-            save_bank(new_bank)
-            # update trade as completed
-            update_trade(trade)
+            # save the new bank and get fee for the trade
+            fee = save_bank(new_bank, offset)
+            # update trade as completed and new offset
+            update_trade(trade, fee)
             wait_trade_completed = False
     else:
         if not trade.order_one.is_completed:
@@ -157,17 +158,21 @@ def new_trading():
     trader = create_trader()
     # check if the last trade is completed
     last_trade = get_last_trade()
+    offset = get_offset()
+    q_bnb = get_quantity_bnb()
     if last_trade is not None:
         if not last_trade.is_completed:
             wait_trade_completed = True
             while (check_bot()) and (wait_trade_completed):
                 last_trade = get_last_trade()
                 wait_trade_completed = check_trade_completed(
-                    trader, last_trade, wait_trade_completed)
+                    trader, last_trade,
+                    wait_trade_completed, offset.bnb * q_bnb)
+                if not wait_trade_completed:
+                    # update offset
+                    offset = new_update_offset(offset)
     market_one, market_two, market_three = get_markets()
     # set quantity of bnb to trade, offsets and wait for trade completed
-    offset = get_offset()
-    q_bnb = get_quantity_bnb()
     sell_q_bnb = q_bnb * (1 - offset.bnb)
     buy_q_bnb = q_bnb * (1 + offset.bnb)
     wait_trade_completed = False
@@ -206,9 +211,6 @@ def new_trading():
                     str(prices[market_three]))
                 save_trade(order_one, order_two, order_three)
                 # update offset and wait
-                offset = new_update_offset(offset)
-                sell_q_bnb = q_bnb * (1 - offset.bnb)
-                buy_q_bnb = q_bnb * (1 + offset.bnb)
                 wait_trade_completed = True
             elif rentability <= 0.9977512:
                 # open a trade buy on market 1 and sell on markets 2 and 3
@@ -238,16 +240,18 @@ def new_trading():
                     str(q_bnb),
                     str(prices[market_three]))
                 save_trade(order_one, order_two, order_three)
-                # update offset and wait
-                offset = new_update_offset(offset)
-                sell_q_bnb = q_bnb * (1 - offset.bnb)
-                buy_q_bnb = q_bnb * (1 + offset.bnb)
                 wait_trade_completed = True
             while (check_bot()) and (wait_trade_completed):
                 # wait the opened trade is completed
                 trade = get_last_trade()
                 wait_trade_completed = check_trade_completed(
-                    trader, trade, wait_trade_completed)
+                    trader, trade,
+                    wait_trade_completed, offset.bnb * q_bnb)
+                if not wait_trade_completed:
+                    # update offset and wait
+                    offset = new_update_offset(offset)
+                    sell_q_bnb = q_bnb * (1 - offset.bnb)
+                    buy_q_bnb = q_bnb * (1 + offset.bnb)
         else:
             # save error in db
             save_error(prices)

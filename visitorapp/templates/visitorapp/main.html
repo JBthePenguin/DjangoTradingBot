@@ -14,13 +14,14 @@
     <div id="completed-trades" class="row text-center">
         {% for trade in trades %}
             <div class="col-md-6 mx-auto">
-                <div class="card border-secondary">
-                    <div class="card-header bg-secondary">
+                <div class="card border-dark">
+                    <div class="card-header bg-success">
                         Open: {{ trade.open_date }} - Close: {{ trade.closed_date }}
                     </div>
                     <div class="card-body">
                         <div class="table-responsive-sm text-center">
                             <table class="table">
+                                <caption>Fee: {{ trade.fee }} BNB</caption>
                                 <thead>
                                     <tr>
                                         <th scope="col">Market</th>
@@ -64,7 +65,7 @@
     <!---->
     <!-- Trade in progress -->
     {% if open_trade.count != 0 %}
-        Trade in progress: open {{ open_trade.0.open_date }}
+        <span class="text-danger">Trade in progress:</span> open {{ open_trade.0.open_date }}
         <div class="table-responsive-sm text-center">
             <table class="table">
                 <thead>

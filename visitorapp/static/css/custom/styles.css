@@ -57,3 +57,14 @@ main #completed-trades .card {
     margin-top: 1rem;
     margin-bottom: 0.5rem;
 }
+
+main #completed-trades .card .card-body {
+    margin-bottom: 0rem;
+    padding-bottom: 0rem;
+}
+
+main #completed-trades .card .card-body .table-responsive-sm table caption {
+    margin-bottom: 0rem;
+    padding-bottom: 0rem;
+    padding-top: 0rem;
+}
