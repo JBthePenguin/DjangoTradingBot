@@ -60,5 +60,3 @@ class Error(models.Model):
 class Offset(models.Model):
     trade_number = models.IntegerField()
     bnb = models.FloatField()
-    btc = models.FloatField()
-    eth = models.FloatField()

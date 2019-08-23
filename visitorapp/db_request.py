@@ -102,37 +102,6 @@ def get_offset():
 
 
 def update_offset(offset):
-    """ update the offset to change the currency that loose
-    at each trade placed and return it"""
-    trade_number = offset.trade_number
-    trade_number += 1
-    if trade_number == 5:
-        trade_number = 1
-    if trade_number == 1:
-        offset_bnb = 0
-        offset_btc = 0
-        offset_eth = 0.001
-    elif trade_number == 2:
-        offset_bnb = 0.01
-        offset_btc = 0
-        offset_eth = 0.001
-    elif trade_number == 3:
-        offset_bnb = 0
-        offset_btc = 0.001
-        offset_eth = 0
-    elif trade_number == 4:
-        offset_bnb = 0.01
-        offset_btc = 0.001
-        offset_eth = 0
-    offset.trade_number = trade_number
-    offset.bnb = offset_bnb
-    offset.btc = offset_btc
-    offset.eth = offset_eth
-    offset.save()
-    return offset
-
-
-def new_update_offset(offset):
     trade_number = offset.trade_number
     trade_number += 1
     offset_bnb = 0

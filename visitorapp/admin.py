@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django import db
 from visitorapp.models import (
     BinanceKey, Currency, Bank, Bot, Market, Order, Trade, Error, Offset)
-from visitorapp.trader_bot import trading, new_trading
+from visitorapp.trader_bot import trading
 from multiprocessing import Process
 
 
@@ -44,7 +44,7 @@ class BotAdmin(admin.ModelAdmin):
         bot.save()
         db.connections.close_all()
         if bot.is_working:
-            bot_trader = Process(target=new_trading)
+            bot_trader = Process(target=trading)
             bot_trader.start()
             self.message_user(request, "Bot is started")
         else:
@@ -99,4 +99,4 @@ class ErrorAdmin(admin.ModelAdmin):
 
 @admin.register(Offset)
 class OffsetAdmin(admin.ModelAdmin):
-    list_display = ("trade_number", "bnb", "btc", "eth")
+    list_display = ("trade_number", "bnb")

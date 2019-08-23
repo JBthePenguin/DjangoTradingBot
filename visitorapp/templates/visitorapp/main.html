@@ -52,10 +52,10 @@
             <nav class="col-md-10 mx-auto" aria-label="...">
                 <div class="row">
                     {% if trades.has_previous %}
-                        <a class="pag_link btn-dark col-md-3 mx-auto my-auto text-center" href="?page={{ trades.previous_page_number }}" style="color: white">&larr; Précédent</a>
+                        <a class="pag_link btn btn-dark col-4 col-md-3 col-lg-2 mx-auto my-auto text-center" href="?page={{ trades.previous_page_number }}" style="color: white">&larr; Previous</a>
                     {% endif %}
                     {% if trades.has_next %}
-                        <a class="pag_link btn-dark col-md-3 mx-auto my-auto text-center" href="?page={{ trades.next_page_number }}" style="color: white">Suivant &rarr;</a>
+                        <a class="pag_link btn btn-dark col-4 col-md-3 col-lg-2 mx-auto my-auto text-center" href="?page={{ trades.next_page_number }}" style="color: white">Next &rarr;</a>
                     {% endif %}
                 </div>
             </nav>
@@ -119,5 +119,13 @@
             </table>
         </div>
     {% endif %}
+    <div class="row text-center">
+        <div class="col-6">
+            <a href="{% url 'index' %}" class="btn btn-outline-danger" role="button">Reload Page</a>
+        </div>
+        <div class="col-6">
+            <a href="https://github.com/JBthePenguin/DjangoTradingBot" class="btn btn-outline-danger" role="button" onclick="window.open(this.href); return false;">Source Code</a>
+        </div>
+    </div>
     <!---->
 </main>
