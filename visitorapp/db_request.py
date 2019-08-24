@@ -85,7 +85,7 @@ def save_bank(new_bank, offset):
     bank.amount_currency_two = new_bank[currencies[1]]
     bank.amount_currency_three = new_bank[currencies[2]]
     bank.save()
-    return fee
+    return round(fee, 8)
 
 
 def save_error(type_error):
@@ -105,10 +105,14 @@ def update_offset(offset):
     trade_number = offset.trade_number
     trade_number += 1
     offset_bnb = 0
-    if trade_number == 5:
+    if trade_number == 41:
         trade_number = 1
-    elif trade_number == 4:
-        offset_bnb = 0.01
+    else:
+        trade_numbers = [5, 10, 15, 25, 30, 35, 40]
+        if trade_number in trade_numbers:
+            offset_bnb = 0.01
+        elif trade_number == 20:
+            offset_bnb = 0.02
     offset.trade_number = trade_number
     offset.bnb = offset_bnb
     offset.save()
