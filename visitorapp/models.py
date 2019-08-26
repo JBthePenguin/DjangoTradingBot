@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class BinanceKey(models.Model):
@@ -24,6 +25,7 @@ class Bank(models.Model):
 class Bot(models.Model):
     is_working = models.BooleanField(default=False)
     quantity_bnb = models.IntegerField(default=1)
+    start_date = models.DateField(default=timezone.now)
 
 
 class Market(models.Model):

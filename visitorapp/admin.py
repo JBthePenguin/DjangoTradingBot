@@ -27,7 +27,7 @@ class BankAdmin(admin.ModelAdmin):
 
 @admin.register(Bot)
 class BotAdmin(admin.ModelAdmin):
-    list_display = ('is_working', "quantity_bnb")
+    list_display = ('is_working', "quantity_bnb", "start_date")
     change_list_template = "visitorapp/bot_changelist.html"
 
     def get_urls(self):

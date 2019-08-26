@@ -27,6 +27,8 @@ def index(request):
         profits[i] = profit
     # bot
     bot_is_working = Bot.objects.all().first().is_working
+    start_date = Bot.objects.all().first().start_date
+    print(start_date)
     # trades completed
     completed_trades = Trade.objects.all().filter(
         is_completed=True).order_by("closed_date").reverse()
@@ -52,6 +54,7 @@ def index(request):
         "present_bank": present_bank,
         "profits": profits,
         "bot_is_working": bot_is_working,
+        "start_date": start_date,
         "completed_trades": completed_trades.count(),
         "trades": trades_pag,
         "paginate": True,
