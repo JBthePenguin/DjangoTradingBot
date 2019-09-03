@@ -105,14 +105,12 @@ def update_offset(offset):
     trade_number = offset.trade_number
     trade_number += 1
     offset_bnb = 0
-    if trade_number == 41:
+    if trade_number == 23:
         trade_number = 1
     else:
-        trade_numbers = [5, 10, 15, 25, 30, 35, 40]
+        trade_numbers = [4, 9, 13, 18, 22]
         if trade_number in trade_numbers:
             offset_bnb = 0.01
-        elif trade_number == 20:
-            offset_bnb = 0.02
     offset.trade_number = trade_number
     offset.bnb = offset_bnb
     offset.save()

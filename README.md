@@ -11,7 +11,7 @@ The bot sends a request to the [binance-api](https://github.com/binance-exchange
 * if that's the case, it opens a trade, that is to say places an order on each market, and waits for the three to be completed before looking again for an opportunity.
 > :bangbang:The waiting time can vary from one second to days, and in absolute terms, an order may never be completed: that's the *RISK*.
 
-Every five trades, the bot balances the earnings of each of the cryptocurrencies using an offset on the amount of BNB to trade on the BNB/BTC market.
+Every four or five trades, the bot balances the earnings of each of the cryptocurrencies using an offset on the amount of BNB to trade.
 ## INSTALLATION
 ### PostgreSQL database
 > :exclamation:maybe you have to install [PostgreSQL](https://www.postgresql.org/)

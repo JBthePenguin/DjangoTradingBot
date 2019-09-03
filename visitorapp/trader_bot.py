@@ -58,8 +58,10 @@ def trading():
                     offset = update_offset(offset)
     market_one, market_two, market_three = get_markets()
     # set quantity of bnb to trade, offsets and wait for trade completed
-    sell_q_bnb = q_bnb * (1 - offset.bnb)
-    buy_q_bnb = q_bnb * (1 + offset.bnb)
+    sell_m_one = q_bnb * (1 - offset.bnb)
+    buy_m_two = q_bnb * (1 - (offset.bnb / 2))
+    buy_m_one = q_bnb * (1 + offset.bnb)
+    sell_m_two = q_bnb * (1 + (offset.bnb / 2))
     wait_trade_completed = False
     while check_bot():
         # get present prices
@@ -75,20 +77,20 @@ def trading():
                     prices[market_three])
                 open_sell_order(
                     trader, market_one,
-                    sell_q_bnb,
+                    sell_m_one,
                     prices[market_one])
                 open_buy_order(
                     trader, market_two,
-                    floor((q_bnb * 1000 * prices[market_one]) / prices[market_two]) / 1000,
+                    floor((buy_m_two * 1000 * prices[market_one]) / prices[market_two]) / 1000,
                     prices[market_two])
                 # save orders and trade in db
                 order_one = save_order(
                     market_one, "Sell",
-                    str(sell_q_bnb),
+                    str(sell_m_one),
                     str(prices[market_one]))
                 order_two = save_order(
                     market_two, "Buy",
-                    str(floor((q_bnb * 1000 * prices[market_one]) / prices[market_two]) / 1000),
+                    str(floor((buy_m_two * 1000 * prices[market_one]) / prices[market_two]) / 1000),
                     str(prices[market_two]))
                 order_three = save_order(
                     market_three, "Buy",
@@ -105,20 +107,20 @@ def trading():
                     prices[market_three])
                 open_buy_order(
                     trader, market_one,
-                    buy_q_bnb,
+                    buy_m_one,
                     prices[market_one])
                 open_sell_order(
                     trader, market_two,
-                    ceil((q_bnb * 1000 * prices[market_one]) / prices[market_two]) / 1000,
+                    ceil((sell_m_two * 1000 * prices[market_one]) / prices[market_two]) / 1000,
                     prices[market_two])
                 # save orders and trade in db
                 order_one = save_order(
                     market_one, "Buy",
-                    str(buy_q_bnb),
+                    str(buy_m_one),
                     str(prices[market_one]))
                 order_two = save_order(
                     market_two, "Sell",
-                    str(ceil((q_bnb * 1000 * prices[market_one]) / prices[market_two]) / 1000),
+                    str(ceil((sell_m_two * 1000 * prices[market_one]) / prices[market_two]) / 1000),
                     str(prices[market_two]))
                 order_three = save_order(
                     market_three, "Sell",
@@ -135,8 +137,10 @@ def trading():
                 if not wait_trade_completed:
                     # update offset and wait
                     offset = update_offset(offset)
-                    sell_q_bnb = q_bnb * (1 - offset.bnb)
-                    buy_q_bnb = q_bnb * (1 + offset.bnb)
+                    sell_m_one = q_bnb * (1 - offset.bnb)
+                    buy_m_two = q_bnb * (1 - (offset.bnb / 2))
+                    buy_m_one = q_bnb * (1 + offset.bnb)
+                    sell_m_two = q_bnb * (1 + (offset.bnb / 2))
         else:
             # save error in db
             save_error(prices)
