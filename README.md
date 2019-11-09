@@ -75,6 +75,7 @@ Connect to the admin site [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/a
 ![Offset in admin interface](screenshots/offset.png)
 * one error: enter *error* for *type*.  
 ![Error in admin interface](screenshots/error.png)
+
 ## USING
 Go to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to see the visitor interface...  
 ![Visitor interface](screenshots/visitor.png)
